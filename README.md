@@ -57,3 +57,14 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Tailwind installation
+
+$npm install tailwindcss @tailwindcss/postcss postcss
+create .postcssrc.json file
+add '@import "tailwindcss";' to styles.css.
+
+## Ngrx setup
+
+$ng add @ngrx/store
+$ng add @ngrx/effects
