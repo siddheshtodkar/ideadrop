@@ -68,3 +68,4 @@ add '@import "tailwindcss";' to styles.css.
 
 $ng add @ngrx/store
 $ng add @ngrx/effects
+$ng add @ngrx/store-devtools

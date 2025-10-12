@@ -14,3 +14,12 @@ export type IdeaToSend = {
   description: string,
   tags: string[]
 }
+
+export type AuthObject = {
+  user: {
+    id: string,
+    name: string,
+    email: string
+  },
+  accessToken: string
+}
