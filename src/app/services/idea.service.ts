@@ -11,9 +11,7 @@ export class IdeaService {
   http = inject(HttpClient)
   fetchIdeas(limit?: number) {
     const params = new HttpParams()
-    if (limit)
-      params.set('_limit', limit)
-    return this.http.get<Idea[]>(`${API_URL}/ideas`, { params: params })
+    return this.http.get<Idea[]>(`${API_URL}/ideas`, { params: limit ? params.set('_limit', limit) : undefined })
   }
   fetchIdea(id: string) {
     return this.http.get<Idea>(`${API_URL}/ideas/${id}`)

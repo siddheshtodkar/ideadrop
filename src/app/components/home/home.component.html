@@ -9,15 +9,15 @@
   <section class="flex-1">
     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Latest Ideas</h2>
     <ul class="space-y-6">
-      @for (idea of ideas; track $index) {
-      <app-idea-card [idea]="idea" [button]="false" ></app-idea-card>
+      @for (idea of ideas$ | async; track $index) {
+      <app-idea-card [idea]="idea" [button]="false"></app-idea-card>
       }
     </ul>
 
     <div class="mt-6">
       <a routerLink="/ideas"
         class="w-full text-center inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2 rounded-md transition">
-      View All Ideas</a>
+        View All Ideas</a>
     </div>
   </section>
 </div>

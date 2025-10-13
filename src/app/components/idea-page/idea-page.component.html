@@ -1,1 +1,17 @@
-<p>idea-page works!</p>
+@if (idea$ | async; as idea) {
+<div class="p-4">
+  <a routerLink='/ideas' class='text-blue-500 underline block mb-4'>Back To Ideas</a>
+  <h2 class="text-2xl font-bold">{{idea.title}}</h2>
+  <p class="mt-2">{{idea.description}}</p>
+  @if(user$ | async; as user) {
+  @if(user.id==idea.user) {
+  <a class='inline-block text-sm bg-yellow-500 hover:bg-yellow-600 text-white mt-4 mr-2 px-4 py-2 rounded transition'
+    [routerLink]='["/ideas", idea?._id?.toString(), "/edit"]'>Edit</a>
+  <button (click)='delete()' [disabled]='isPending()'
+    class='text-sm bg-red-600 hover:bg-red-700 text-white mt-4 px-4 py-2 rounded transition disabled:opacity-50'>
+    {{isPending() ? 'Deleting...' : 'Delete'}}
+  </button>
+  }
+  }
+</div>
+}
