@@ -1,1 +1,45 @@
-<p>idea-form works!</p>
+<div class='space-y-4'>
+  <div class="flex justify-between items-center mb-4">
+    @if (editFlag()) {
+    <h1 class="text-2xl font-bold">Edit Idea</h1>
+    <a [routerLink]="['/ideas', ideaId]" class='text-sm text-blue-600 hover:underline'>Back To Idea</a>
+    }
+    @else {
+    <h1 class="text-2xl font-bold">Create New Idea</h1>
+    }
+  </div>
+  <form class="space-y-2" onSubmit={handleSubmit}>
+    <div>
+      <label for="title" class='block text-gray-700 font-medium mb-1'>Title</label>
+      <input type="text" name="title" id="title" placeholder='Enter Idea Title'
+        class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
+    </div>
+    <div>
+      <label for="summary" class='block text-gray-700 font-medium mb-1'>Summary</label>
+      <input type="text" name="summary" id="summary" placeholder='Enter Idea Summary'
+        class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
+    </div>
+    <div>
+      <label for="description" class='block text-gray-700 font-medium mb-1'>Description</label>
+      <textarea name="description" id="description" placeholder='Write out the description of your Idea'
+        class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 '></textarea>
+    </div>
+    <div>
+      <label for="tags" class='block text-gray-700 font-medium mb-1'>Tags</label>
+      <input type="text" name="tags" id="tags" placeholder='Optional tags, comma separated'
+        class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
+    </div>
+    <div class="mt-5">
+      <button
+        class='block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed'
+        type="submit" [disabled]='isPending()'>
+        @if(editFlag()) {
+        {{isPending()?'Updateing...' : 'Update Idea'}}
+        }
+        @else {
+        {{isPending()?'Creating...' : 'Create Idea'}}
+        }
+      </button>
+    </div>
+  </form>
+</div>
