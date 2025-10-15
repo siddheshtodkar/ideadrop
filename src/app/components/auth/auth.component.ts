@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
 import { Store } from '@ngrx/store';
-import { authObjectAction } from '../../store/auth/actions';
+import { authObjectAction } from '../../store/actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 

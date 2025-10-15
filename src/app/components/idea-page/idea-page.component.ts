@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdeaService } from '../../services/idea.service';
 import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { userSelector } from '../../store/auth/selectors';
+import { userSelector } from '../../store/selectors';
 
 @Component({
   selector: 'app-idea-page',

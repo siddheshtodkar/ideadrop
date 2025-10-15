@@ -20,6 +20,6 @@ export type AuthObject = {
     id: string,
     name: string,
     email: string
-  },
-  accessToken: string
+  } | null,
+  accessToken: string | null
 }

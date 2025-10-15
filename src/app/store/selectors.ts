@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { AppState } from "../state";
+import { AppState } from "./state";
 
 const state = (appState: AppState) => appState.authObject
 

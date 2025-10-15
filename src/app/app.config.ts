@@ -6,7 +6,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient } from '@angular/common/http';
-import { authObjectReducer } from './store/auth/reducers';
+import { authObjectReducer } from './store/reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -6,7 +6,7 @@
   @if(user$ | async; as user) {
   @if(user.id==idea.user) {
   <a class='inline-block text-sm bg-yellow-500 hover:bg-yellow-600 text-white mt-4 mr-2 px-4 py-2 rounded transition'
-    [routerLink]='["/ideas", idea?._id?.toString(), "/edit"]'>Edit</a>
+    [routerLink]='["/ideas", idea?._id?.toString(), "edit"]'>Edit</a>
   <button (click)='delete()' [disabled]='isPending()'
     class='text-sm bg-red-600 hover:bg-red-700 text-white mt-4 px-4 py-2 rounded transition disabled:opacity-50'>
     {{isPending() ? 'Deleting...' : 'Delete'}}
