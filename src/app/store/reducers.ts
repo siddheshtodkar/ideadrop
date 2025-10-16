@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { AuthObject } from "../../types";
+import { AuthObject } from "../types";
 import { authObjectAction } from "./actions";
 
 const initialState: AuthObject = {

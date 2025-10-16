@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Idea } from '../../../types';
+import { Idea } from '../../types';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

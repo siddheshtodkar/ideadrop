@@ -8,26 +8,31 @@
     <h1 class="text-2xl font-bold">Create New Idea</h1>
     }
   </div>
-  <form class="space-y-2" onSubmit={handleSubmit}>
+  <form class="space-y-2" (ngSubmit)='submit()' [formGroup]="ideaForm">
     <div>
       <label for="title" class='block text-gray-700 font-medium mb-1'>Title</label>
-      <input type="text" name="title" id="title" placeholder='Enter Idea Title'
+      <input type="text" formControlName="title" id="title" placeholder='Enter Idea Title'
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
     </div>
     <div>
       <label for="summary" class='block text-gray-700 font-medium mb-1'>Summary</label>
-      <input type="text" name="summary" id="summary" placeholder='Enter Idea Summary'
+      <input type="text" formControlName="summary" id="summary" placeholder='Enter Idea Summary'
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
     </div>
     <div>
       <label for="description" class='block text-gray-700 font-medium mb-1'>Description</label>
-      <textarea name="description" id="description" placeholder='Write out the description of your Idea'
+      <textarea formControlName="description" id="description" placeholder='Write out the description of your Idea'
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 '></textarea>
     </div>
-    <div>
-      <label for="tags" class='block text-gray-700 font-medium mb-1'>Tags</label>
-      <input type="text" name="tags" id="tags" placeholder='Optional tags, comma separated'
+    <div formArrayName="tags">
+      <label for="tags" class='block text-gray-700 font-medium mb-1'>Tags
+        <span (click)="addTag()">Add</span>
+      </label>
+      @for (tag of tags.controls; track $index; let i = $index) {
+      <input type="text" [formControlName]="i" id="tags{{$index}}" placeholder='tags'
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
+      <span (click)="removeTag(i)">remove</span>
+      }
     </div>
     <div class="mt-5">
       <button
