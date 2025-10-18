@@ -7,18 +7,18 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authObjectReducer } from './store/reducers';
-import { accessTokenInterceptor, refreshTokenInterceptor } from './app.interceptor';
+import { authInterceptor, credentialsInterceptor } from './app.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
     provideHttpClient(
-      withInterceptors([accessTokenInterceptor, refreshTokenInterceptor])
+      withInterceptors([authInterceptor, credentialsInterceptor])
     ),
     provideStore({
       'authObject': authObjectReducer
-    }), 
+    }),
     provideEffects(),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states

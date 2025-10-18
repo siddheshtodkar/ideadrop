@@ -19,6 +19,6 @@ export class AuthService {
     return this.http.post(`${API_URL}/auth/logout`, null)
   }
   refresh() {
-    return this.http.post<{accessToken: string}>(`${API_URL}/auth/refresh`, null)
+    return this.http.post<AuthObject>(`${API_URL}/auth/refresh`, null)
   }
 }
