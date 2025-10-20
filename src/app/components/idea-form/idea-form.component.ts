@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { FormArray, Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdeaService } from '../../services/idea.service';
+import { toast } from 'ngx-sonner';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-idea-form',
@@ -18,6 +20,7 @@ export class IdeaFormComponent {
   isPending = signal<boolean>(false)
   ideaId = this.route.snapshot.paramMap.get('id')
   idea$ = this.ideaService.fetchIdea(this.ideaId || '')
+  subscriptions: Subscription[] = []
   ideaForm = this.formBuilder.group({
     title: ['', Validators.required],
     summary: ['', Validators.required],
@@ -37,33 +40,36 @@ export class IdeaFormComponent {
     console.log(this.ideaForm.getRawValue())
     if (this.ideaForm.valid) {
       if (this.editFlag()) {
-        this.ideaService.updateIdea(this.ideaId!, this.ideaForm.getRawValue()).subscribe(data => {
-          console.log(data);
+        this.subscriptions.push(this.ideaService.updateIdea(this.ideaId!, this.ideaForm.getRawValue()).subscribe(data => {
+          toast.success('Idea Updated Successfully')
           this.router.navigateByUrl('/ideas')
         }, err => {
-          console.log(err);
-        })
+          toast.error(err.message)
+        }))
       }
       else {
-        this.ideaService.createIdea(this.ideaForm.getRawValue()).subscribe(data => {
-          console.log(data);
+        this.subscriptions.push(this.ideaService.createIdea(this.ideaForm.getRawValue()).subscribe(data => {
+          toast.success('Idea Created Successfully')
           this.router.navigateByUrl('/ideas')
         }, err => {
-          console.log(err);
-        })
+          toast.error(err.message)
+        }))
       }
     }
   }
   ngOnInit() {
     if (this.ideaId) {
       this.editFlag.set(true)
-      this.idea$.subscribe(data => {
+      this.subscriptions.push(this.idea$.subscribe(data => {
         this.ideaForm.patchValue(data)
         this.tags.clear()
         data.tags.forEach(tag => this.tags.push(this.formBuilder.control(tag)))
       }, err => {
-        console.log(err);
-      })
+        toast.error(err.message)
+      }))
     }
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

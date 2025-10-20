@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { authObjectAction } from '../../store/actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-auth',
@@ -24,11 +25,12 @@ export class AuthComponent {
   subscription: Subscription | null = null
   submit() {
     this.isPending.set(true)
-    if (this.isLogin()) 
+    if (this.isLogin())
       delete this.credentials.name
     this.subscription = this.authService[this.isLogin() ? 'login' : 'register'](this.credentials).subscribe(data => {
       this.store.dispatch(authObjectAction(data))
       this.isPending.set(false)
+      toast.success(`User ${this.isLogin() ? 'Login' : 'Register'} Successfull`)
       this.router.navigateByUrl('/ideas')
     }, (err: HttpErrorResponse) => {
       this.error.set(err.error.message)

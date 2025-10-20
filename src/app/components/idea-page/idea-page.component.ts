@@ -4,6 +4,7 @@ import { IdeaService } from '../../services/idea.service';
 import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { userSelector } from '../../store/selectors';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-idea-page',
@@ -25,7 +26,10 @@ export class IdeaPageComponent {
       this.isPending.set(true)
       this.ideaService.deleteIdea(this.route.snapshot.paramMap.get('id') || '').subscribe(data => {
         this.isPending.set(false)
+        toast.success('Idea Deleted Successfully')
         this.router.navigateByUrl('/ideas')
+      }, err => {
+        toast.error(err.message)
       })
     }
   }
