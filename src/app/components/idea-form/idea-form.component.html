@@ -25,13 +25,16 @@
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 '></textarea>
     </div>
     <div formArrayName="tags">
-      <label for="tags" class='block text-gray-700 font-medium mb-1'>Tags
-        <span (click)="addTag()">Add</span>
-      </label>
+      <div class="flex justify-between items-center">
+        <label for="tags" class='block text-gray-700 font-medium mb-1'>Tags</label>
+        <img class="w-8 cursor-pointer" src="plus-solid-full.svg" alt="add" (click)="addTag()">
+      </div>
       @for (tag of tags.controls; track $index; let i = $index) {
-      <input type="text" [formControlName]="i" id="tags{{$index}}" placeholder='tags'
-        class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
-      <span (click)="removeTag(i)">remove</span>
+      <div class="flex mt-5 items-center gap-5">
+        <input type="text" [formControlName]="i" id="tags{{$index}}" placeholder='tags'
+          class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500' />
+        <img class="w-8 cursor-pointer" src="trash-solid-full.svg" alt="remove" (click)="removeTag(i)">
+      </div>
       }
     </div>
     <div class="mt-5">
