@@ -17,10 +17,6 @@ export class AppComponent {
   authService = inject(AuthService)
   title = 'ideadrop';
   ngOnInit() {
-    this.authService.refresh().subscribe(data => {
-      this.store.dispatch(authObjectAction(data))
-    }, err => {
-      toast.error(err.message)
-    })
+    this.authService.refresh().subscribe(data => this.store.dispatch(authObjectAction(data)))
   }
 }

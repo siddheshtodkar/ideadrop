@@ -12,17 +12,29 @@
     <div>
       <label for="title" class='block text-gray-700 font-medium mb-1'>Title</label>
       <input type="text" formControlName="title" id="title" placeholder='Enter Idea Title'
+        [ngClass]="submitted() && title?.invalid ? 'border-red-500': ''"
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
+      @if (submitted() && title?.invalid) {
+      <span class="text-red-700">Title Required</span>
+      }
     </div>
     <div>
       <label for="summary" class='block text-gray-700 font-medium mb-1'>Summary</label>
       <input type="text" formControlName="summary" id="summary" placeholder='Enter Idea Summary'
+        [ngClass]="submitted() && summary?.invalid ? 'border-red-500': ''"
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ' />
+      @if (submitted() && summary?.invalid) {
+      <span class="text-red-700">Summary Required</span>
+      }
     </div>
     <div>
       <label for="description" class='block text-gray-700 font-medium mb-1'>Description</label>
       <textarea formControlName="description" id="description" placeholder='Write out the description of your Idea'
+        [class.border-red-500]="submitted() && description?.invalid"
         class='w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 '></textarea>
+      @if (submitted() && description?.invalid) {
+      <span class="text-red-700">Description Required</span>
+      }
     </div>
     <div formArrayName="tags">
       <div class="flex justify-between items-center">

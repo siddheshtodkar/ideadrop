@@ -4,10 +4,11 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IdeaService } from '../../services/idea.service';
 import { toast } from 'ngx-sonner';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-idea-form',
-  imports: [RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './idea-form.component.html',
   styleUrl: './idea-form.component.css'
 })
@@ -18,6 +19,7 @@ export class IdeaFormComponent {
   ideaService = inject(IdeaService)
   editFlag = signal<boolean>(false)
   isPending = signal<boolean>(false)
+  submitted = signal<boolean>(false)
   ideaId = this.route.snapshot.paramMap.get('id')
   idea$ = this.ideaService.fetchIdea(this.ideaId || '')
   subscriptions: Subscription[] = []
@@ -27,6 +29,15 @@ export class IdeaFormComponent {
     description: ['', Validators.required],
     tags: this.formBuilder.array([this.formBuilder.control('')])
   })
+  get title() {
+    return this.ideaForm.get('title')
+  }
+  get summary() {
+    return this.ideaForm.get('summary')
+  }
+  get description() {
+    return this.ideaForm.get('description')
+  }
   get tags() {
     return this.ideaForm.get('tags') as FormArray
   }
@@ -37,6 +48,7 @@ export class IdeaFormComponent {
     this.tags.removeAt(index)
   }
   submit() {
+    this.submitted.set(true)
     console.log(this.ideaForm.getRawValue())
     if (this.ideaForm.valid) {
       if (this.editFlag()) {
