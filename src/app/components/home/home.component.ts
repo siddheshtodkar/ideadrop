@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { IdeaCardComponent } from '../idea-card/idea-card.component';
 import { RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { IdeaService } from '../../services/idea.service';
+import { IdeaCardComponent } from '../idea/idea-card/idea-card.component';
 
 
 @Component({

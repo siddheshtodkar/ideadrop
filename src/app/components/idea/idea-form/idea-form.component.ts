@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormArray, Validators, FormsModule, ReactiveFormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { IdeaService } from '../../services/idea.service';
 import { toast } from 'ngx-sonner';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { IdeaService } from '../../../services/idea.service';
 
 @Component({
   selector: 'app-idea-form',

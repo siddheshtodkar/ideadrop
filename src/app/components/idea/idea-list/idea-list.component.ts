@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { IdeaCardComponent } from '../idea-card/idea-card.component';
 import { AsyncPipe } from '@angular/common';
-import { IdeaService } from '../../services/idea.service';
+import { IdeaService } from '../../../services/idea.service';
 
 @Component({
   selector: 'app-idea-list',
